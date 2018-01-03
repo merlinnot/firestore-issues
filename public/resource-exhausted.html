@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script defer src="/__/firebase/4.8.1/firebase-app.js"></script>
+    <script defer src="/__/firebase/4.8.1/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+  </head>
+  <body>
+    <p id="load">Trying to load collection...</p>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+        try {
+          const app = firebase.app();
+          const firestore = app.firestore();
+          const [{docs: q0}, {docs: q1}, {docs: q2}] = await Promise.all([
+            firestore.collection('0').get(),
+            firestore.collection('1').get(),
+            firestore.collection('2').get(),
+          ]);
+
+          document.getElementById('load').innerHTML =
+            `Loaded: q1: ${q1.length}, q2: ${q2.length}, q3: ${q3.length}`;
+        } catch (e) {
+          console.error(e);
+          document.getElementById('load').innerHTML =
+            'An error occurred, check the console.';
+        }
+      });
+    </script>
+  </body>
+</html>
